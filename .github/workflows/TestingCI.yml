@@ -27,15 +27,17 @@ jobs:
         pip install -Iv pyautogui==0.9.54
         pip install pytest
         pip install behave
-        
-    - name: Run Acceptance tests for Ahorcado App
+
+    - name: Set up xvfb
       run: |
         sudo apt-get update
         sudo apt-get install -y x11-xserver-utils
         touch ~/.Xauthority
-        xauth generate :99 . trusted
         export DISPLAY=:99
-        Xvfb :99 &
+
+    - name: Run Acceptance tests for Ahorcado App
+      run: |
+        Xvfb :99 -screen 0 1920x1080x24 & 
         behave features --junit
         #python -c "import pyautogui; pyautogui.screenshot('debug_screenshot.png')"
           
