@@ -6,7 +6,7 @@ import os
 
 def iniciar_aplicacion():
     print("Iniciando la aplicación...")
-    script_path = os.path.abspath("AhorcadoApp.py")
+    script_path = os.path.abspath("../../AhorcadoApp.py")
     
     process = sp.Popen(['python', script_path], stdout=sp.PIPE, stderr=sp.PIPE)
     sleep(1)  # Tiempo de espera para cargar la aplicación
