@@ -27,6 +27,7 @@ jobs:
         pip install -Iv pyautogui==0.9.54
         pip install pytest
         pip install behave
+        sudo apt install gnome-screenshot
 
     - name: Set up xvfb
       run: |
