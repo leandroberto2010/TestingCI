@@ -33,12 +33,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y x11-xserver-utils
         touch ~/.Xauthority
-        export DISPLAY=:99
+        Xvfb :99 -screen 0 1920x1080x24 &
+        sleep 2
 
     - name: Run Acceptance tests for Ahorcado App
       run: |
-        Xvfb :99 -screen 0 1920x1080x24 & 
-        behave features --junit
+        DISPLAY=:99 behave features --junit
         #python -c "import pyautogui; pyautogui.screenshot('debug_screenshot.png')"
           
     - name: Upload Debug Screenshot
