@@ -1,0 +1,52 @@
+name: Testing
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:      
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies for UT
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+    - name: Run unit tests for ahorcado logic
+      run: |
+        pip install pytest pytest-cov
+        pytest --cov --cov-report=xml --ignore test_ahorcadoGUI.py
+        
+    - name: Upload results to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Install dependencies for AT
+      run: |
+        pip install xlib
+        pip install opencv-python
+        pip install -Iv pillow==11.0.0
+        pip install -Iv PyScreeze==1.0.1
+        pip install -Iv pyautogui==0.9.54
+        pip install behave
+    - name: Run Acceptance tests for Ahorcado App
+      run: |
+        behave D:\a\Ahorcado\Ahorcado\features --junit
+        #python -c "import pyautogui; pyautogui.screenshot('debug_screenshot.png')"
+          
+    - name: Upload Debug Screenshot
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug_screenshot
+        path: debug_screenshot.png
