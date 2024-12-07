@@ -30,6 +30,9 @@ jobs:
         
     - name: Run Acceptance tests for Ahorcado App
       run: |
+        sudo apt-get update
+        sudo apt-get install -y x11-xserver-utils
+        xauth generate :99 . trusted
         export DISPLAY=:99
         Xvfb :99 &
         behave features --junit
