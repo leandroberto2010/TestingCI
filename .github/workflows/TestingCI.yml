@@ -25,6 +25,7 @@ jobs:
         pip install -Iv pillow==11.0.0
         pip install -Iv PyScreeze==1.0.1
         pip install -Iv pyautogui==0.9.54
+        pip install pytest
         pip install behave
         
     - name: Run Acceptance tests for Ahorcado App
