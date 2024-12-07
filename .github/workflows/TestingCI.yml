@@ -32,7 +32,7 @@ jobs:
       run: |
         export DISPLAY=:99
         Xvfb :99 &
-        behave D:\a\TestingCI\TestingCI\features --junit
+        behave features --junit
         #python -c "import pyautogui; pyautogui.screenshot('debug_screenshot.png')"
           
     - name: Upload Debug Screenshot
