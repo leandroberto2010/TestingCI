@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:      
     - name: Checkout repository
@@ -20,7 +20,8 @@ jobs:
 
     - name: Install dependencies for AT
       run: |
-        pip install xlib
+        python -m pip install --upgrade pip
+        python -m pip install .
         pip install opencv-python
         pip install -Iv pillow==11.0.0
         pip install -Iv PyScreeze==1.0.1
@@ -30,6 +31,8 @@ jobs:
         
     - name: Run Acceptance tests for Ahorcado App
       run: |
+        export DISPLAY=:99
+        Xvfb :99 &
         behave D:\a\TestingCI\TestingCI\features --junit
         #python -c "import pyautogui; pyautogui.screenshot('debug_screenshot.png')"
           
