@@ -29,7 +29,7 @@ jobs:
         
     - name: Run Acceptance tests for Ahorcado App
       run: |
-        behave D:\a\TestingCI\features --junit
+        behave D:\a\TestingCI\TestingCI\features --junit
         #python -c "import pyautogui; pyautogui.screenshot('debug_screenshot.png')"
           
     - name: Upload Debug Screenshot
