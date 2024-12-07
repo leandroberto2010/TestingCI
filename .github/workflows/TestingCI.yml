@@ -32,6 +32,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y x11-xserver-utils
+        touch ~/.Xauthority
         xauth generate :99 . trusted
         export DISPLAY=:99
         Xvfb :99 &
